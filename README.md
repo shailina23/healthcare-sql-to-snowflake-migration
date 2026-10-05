@@ -1,43 +1,36 @@
 # Healthcare SQL → Snowflake Migration Lab
 
-A synthetic portfolio project exploring how to document and migrate a legacy healthcare reporting workflow toward a Snowflake-style analytics model.
+> Legacy reporting logic translated into a cloud-warehouse pattern with reconciliation.
 
-> **Project status:** Foundation stage. This repository currently contains synthetic source data and its data dictionary. SQL transformations, target models, and reconciliation code are planned next.
+## Project status
+**Portfolio / synthetic client-style project.** The datasets and business names are fictional and were created for demonstration. The engineering patterns are designed to be realistic and reusable.
 
-## Scenario
+## Business problem
+An imaginary healthcare reporting team has monthly revenue logic embedded in a legacy SQL workload. The goal is to preserve business logic while moving raw data into Snowflake-style layers and producing a clean analytics view.
 
-A fictional healthcare reporting team needs to preserve its reporting rules while moving legacy data into an analytics-ready model. This project is being built in stages so the source data, assumptions, transformation logic, and validation approach are reviewable.
+## Architecture
+`Legacy SQL → RAW tables → CURATED view → reconciliation → BI-ready dataset`
 
-## Current files
+## What this demonstrates
+- Production-style data engineering structure
+- Clear source-to-target mappings
+- Reproducible transformations
+- Data-quality / reconciliation checks
+- Business-facing documentation
+- A realistic handover path
 
-- `data/patients_legacy.csv` — 250 synthetic patient records.
-- `data/visits_legacy.csv` — 500 synthetic visit records.
-- `docs/data_dictionary.md` — row grain, field definitions, and format notes.
-
-All records are fictional and generated for demonstration. They do not represent real patients or a healthcare organization.
-
-## Data grain
-
-- **Patients:** one row per `patient_id`.
-- **Visits:** one row per `visit_id`. A patient may have multiple visits.
-
-## Planned project stages
-
-1. Document the source files and business assumptions.
-2. Add the legacy reporting query and source-to-target mapping.
-3. Define the Snowflake-style target model.
-4. Add a local reconciliation example and document its actual output.
-
-## Current limitations
-
-This stage does not include a running transformation, a Snowflake connection, or target-side reconciliation. I’ll update this README as each stage is implemented.
+## How to run
+1. Install Python + pandas. 2. Run `python scripts/run_reconciliation.py`. 3. Review the legacy query under `sql/legacy/`. 4. Review Snowflake DDL/views under `sql/snowflake/`. 5. Load the CSVs into a Snowflake trial account if you want a live cloud demo.
 
 ## Repository structure
+`data/` = synthetic source data
+`sql/legacy/` = old reporting logic
+`sql/snowflake/` = target DDL and analytics view
+`scripts/` = reconciliation automation
+`docs/` = mapping and architecture
 
-```text
-data/
-  patients_legacy.csv
-  visits_legacy.csv
-docs/
-  data_dictionary.md
-README.md
+## Business value
+Demonstrates migration discovery, SQL translation, target modeling, and control-total validation — the exact conversation a client needs to have before trusting a migration.
+
+## Important note
+This is a portfolio simulation, not a claim that the fictional healthcare organization was a real client.
